@@ -250,6 +250,7 @@ Alpine.data('bookingWizard', () => ({
 
     // Event pattern state
     eventList: [],
+    openEventGroups: {},
     selectedEvent: null,
     eventSpotCount: 1,
     eventIsWaitlisted: false,
@@ -1197,6 +1198,10 @@ Alpine.data('bookingWizard', () => ({
     get cancellationPolicyText() { return config.cancellation_policy || ''; },
     togglePolicy() { this.policyOpen = !this.policyOpen; },
 
+    // ── Event group accordion ──
+    toggleEventGroup(id) { this.openEventGroups[id] = !this.openEventGroups[id]; },
+    isEventGroupOpen(id) { return !!this.openEventGroups[id]; },
+
     // ── Toast ──
     showToast(message, type = 'error') {
         if (this.toastTimer) clearTimeout(this.toastTimer);
@@ -2038,6 +2043,49 @@ Alpine.data('bookingWizard', () => ({
         return groups;
     },
 
+    // ── Event grouping (by parent event/series, then by month) ──
+    // Occurrences of the same recurring event share the same `id`; eventList
+    // is already sorted chronologically by the API, so a single pass groups
+    // consecutive-by-id occurrences while preserving series order.
+    get groupedEventList() {
+        if (!this.eventList || this.eventList.length === 0) return [];
+        const groups = [];
+        const byId = new Map();
+
+        for (const event of this.eventList) {
+            let group = byId.get(event.id);
+            if (!group) {
+                group = {
+                    id: event.id,
+                    name: event.name,
+                    price: event.price,
+                    location: event.location,
+                    allow_waitlist: event.allow_waitlist,
+                    occurrences: [],
+                };
+                byId.set(event.id, group);
+                groups.push(group);
+            }
+            group.occurrences.push(event);
+        }
+
+        for (const group of groups) {
+            const monthGroups = [];
+            let currentMonth = null;
+            for (const occurrence of group.occurrences) {
+                const label = this.formatEventMonthLabel(occurrence.start_datetime);
+                if (!currentMonth || currentMonth.label !== label) {
+                    currentMonth = { label, occurrences: [] };
+                    monthGroups.push(currentMonth);
+                }
+                currentMonth.occurrences.push(occurrence);
+            }
+            group.monthGroups = monthGroups;
+        }
+
+        return groups;
+    },
+
     // ── Navigation helpers ──
     get showStaffBackLink() {
         return this.services.length > 1;
@@ -2643,6 +2691,7 @@ Alpine.data('bookingWizard', () => ({
         try {
             const data = await this.api('/events');
             this.eventList = data.events || [];
+            this.openEventGroups = {};
             if (this.eventList.length === 0) {
                 this.step = 'empty'; // Terminal state, no prior visible step
             } else {
@@ -2702,6 +2751,16 @@ Alpine.data('bookingWizard', () => ({
         try {
             const d = new Date(dateStr);
             const label = d.toLocaleDateString(fmt.intl_locale || config.locale || 'en', { weekday: 'short', month: 'short', day: 'numeric' });
+            return label.charAt(0).toUpperCase() + label.slice(1);
+        } catch {
+            return dateStr;
+        }
+    },
+
+    formatEventMonthLabel(dateStr) {
+        try {
+            const d = new Date(dateStr);
+            const label = d.toLocaleDateString(fmt.intl_locale || config.locale || 'en', { month: 'long', year: 'numeric' });
             return label.charAt(0).toUpperCase() + label.slice(1);
         } catch {
             return dateStr;

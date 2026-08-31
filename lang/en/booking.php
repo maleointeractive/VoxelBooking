@@ -211,6 +211,7 @@ return [
         'waitlist_badge'      => 'Waitlist',
         'no_upcoming'         => 'No upcoming events available for rescheduling.',
         'spots_left'          => 'spots left',
+        'dates_count'         => ':count dates',
     ],
 
     // ── Errors & Toasts ──
