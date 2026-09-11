@@ -211,6 +211,7 @@ return [
         'waitlist_badge'      => 'Liste d\'attente',
         'no_upcoming'         => 'Aucun événement à venir disponible pour un report.',
         'spots_left'          => 'Places restantes',
+        'dates_count'         => ':count dates',
     ],
 
     // ── Errors & Toasts ──
