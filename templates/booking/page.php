@@ -452,42 +452,65 @@
                 <div class="vb-book-step-header">
                     <div class="vb-book-step-title" x-text="t('event.events_title')"></div>
                 </div>
-                <div class="vb-book-event-list">
-                    <template x-for="(event, i) in eventList" :key="event.id + '-' + (event.date || '')">
-                        <button type="button"
-                                class="vb-book-event-card"
-                                @click="selectEvent(event)"
-                                :class="{ 'is-full': event.remaining <= 0 && !event.allow_waitlist }">
-                            <div class="vb-book-event-card-header">
-                                <span class="vb-book-event-name" x-text="event.name"></span>
-                                <span class="vb-book-event-price" x-text="formatEventPrice(event.price)"></span>
-                            </div>
-                            <div class="vb-book-event-card-meta">
-                                <span class="vb-book-event-date">
-                                    <i data-lucide="calendar"></i>
-                                    <span x-text="formatEventDate(event.start_datetime)"></span>
+                <div class="vb-book-event-groups">
+                    <template x-for="group in groupedEventList" :key="group.id">
+                        <div class="vb-book-event-group" :class="{ 'is-open': isEventGroupOpen(group.id) }">
+                            <button type="button"
+                                    class="vb-book-event-group-header"
+                                    @click="toggleEventGroup(group.id)"
+                                    :aria-expanded="isEventGroupOpen(group.id)">
+                                <span class="vb-book-event-group-name" x-text="group.name"></span>
+                                <span class="vb-book-event-group-meta">
+                                    <span class="vb-book-event-group-count"
+                                          x-text="t('event.dates_count').replace(':count', group.occurrences.length)"></span>
+                                    <svg class="vb-book-event-group-chevron" viewBox="0 0 16 16" fill="none">
+                                        <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
                                 </span>
-                                <span class="vb-book-event-time">
-                                    <i data-lucide="clock"></i>
-                                    <span x-text="formatEventTime(event.start_datetime) + ' – ' + formatEventTime(event.end_datetime)"></span>
-                                </span>
-                                <span x-show="event.location" class="vb-book-event-location">
-                                    <i data-lucide="map-pin"></i>
-                                    <span x-text="event.location"></span>
-                                </span>
+                            </button>
+                            <div class="vb-book-event-group-body" x-show="isEventGroupOpen(group.id)" x-transition>
+                                <template x-for="monthGroup in group.monthGroups" :key="monthGroup.label">
+                                    <div class="vb-book-event-month-group">
+                                        <div class="vb-book-event-month-label" x-text="monthGroup.label"></div>
+                                        <div class="vb-book-event-list">
+                                            <template x-for="event in monthGroup.occurrences" :key="event.id + '-' + (event.date || '')">
+                                                <button type="button"
+                                                        class="vb-book-event-card"
+                                                        @click="selectEvent(event)"
+                                                        :class="{ 'is-full': event.remaining <= 0 && !event.allow_waitlist }">
+                                                    <div class="vb-book-event-card-meta">
+                                                        <span class="vb-book-event-date">
+                                                            <i data-lucide="calendar"></i>
+                                                            <span x-text="formatEventDate(event.start_datetime)"></span>
+                                                        </span>
+                                                        <span class="vb-book-event-time">
+                                                            <i data-lucide="clock"></i>
+                                                            <span x-text="formatEventTime(event.start_datetime) + ' – ' + formatEventTime(event.end_datetime)"></span>
+                                                        </span>
+                                                        <span x-show="event.location" class="vb-book-event-location">
+                                                            <i data-lucide="map-pin"></i>
+                                                            <span x-text="event.location"></span>
+                                                        </span>
+                                                        <span class="vb-book-event-price" x-text="formatEventPrice(event.price)"></span>
+                                                    </div>
+                                                    <div class="vb-book-event-card-footer">
+                                                        <span x-show="event.remaining > 0"
+                                                              class="vb-book-event-spots"
+                                                              x-text="t('event.spots_remaining').replace(':count', event.remaining)"></span>
+                                                        <span x-show="event.remaining <= 0 && event.allow_waitlist"
+                                                              class="vb-book-event-badge vb-book-event-badge-waitlist"
+                                                              x-text="t('event.waitlist_badge')"></span>
+                                                        <span x-show="event.remaining <= 0 && !event.allow_waitlist"
+                                                              class="vb-book-event-badge vb-book-event-badge-full"
+                                                              x-text="t('event.full_badge')"></span>
+                                                    </div>
+                                                </button>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
                             </div>
-                            <div class="vb-book-event-card-footer">
-                                <span x-show="event.remaining > 0"
-                                      class="vb-book-event-spots"
-                                      x-text="t('event.spots_remaining').replace(':count', event.remaining)"></span>
-                                <span x-show="event.remaining <= 0 && event.allow_waitlist"
-                                      class="vb-book-event-badge vb-book-event-badge-waitlist"
-                                      x-text="t('event.waitlist_badge')"></span>
-                                <span x-show="event.remaining <= 0 && !event.allow_waitlist"
-                                      class="vb-book-event-badge vb-book-event-badge-full"
-                                      x-text="t('event.full_badge')"></span>
-                            </div>
-                        </button>
+                        </div>
                     </template>
                 </div>
                 <div x-show="eventList.length === 0" class="vb-book-empty">

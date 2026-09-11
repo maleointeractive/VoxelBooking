@@ -2288,18 +2288,6 @@ body {
   pointer-events: none;
 }
 
-.vb-book-event-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.vb-book-event-name {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--vb-text);
-}
-
 .vb-book-event-price {
   font-size: 0.9rem;
   font-weight: 600;
@@ -2309,6 +2297,7 @@ body {
 .vb-book-event-card-meta {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 16px;
   font-size: 0.8rem;
   color: var(--vb-text-secondary);
@@ -2324,6 +2313,10 @@ body {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
+}
+
+.vb-book-event-card-meta .vb-book-event-price {
+  margin-left: auto;
 }
 
 .vb-book-event-card-footer {
@@ -2355,6 +2348,92 @@ body {
 .vb-book-event-badge-full {
   background: #FEE2E2;
   color: #DC2626;
+}
+
+/* Event Groups (accordion) */
+
+.vb-book-event-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vb-book-event-group {
+  border: 1px solid var(--vb-border);
+  border-radius: var(--vb-radius-xl);
+  overflow: hidden;
+}
+
+.vb-book-event-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--vb-bg);
+  border: none;
+  cursor: pointer;
+  font-family: var(--vb-font-sans);
+  text-align: left;
+  transition: background var(--vb-duration-fast) var(--vb-ease-out);
+}
+
+.vb-book-event-group-header:hover {
+  background: var(--vb-brand-light);
+}
+
+.vb-book-event-group-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--vb-text);
+}
+
+.vb-book-event-group-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.vb-book-event-group-count {
+  font-size: 0.8rem;
+  color: var(--vb-text-secondary);
+  white-space: nowrap;
+}
+
+.vb-book-event-group-chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--vb-text-tertiary);
+  transition: transform 200ms var(--vb-ease-out);
+  flex-shrink: 0;
+}
+
+.vb-book-event-group.is-open .vb-book-event-group-chevron {
+  transform: rotate(90deg);
+}
+
+.vb-book-event-group-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 14px 20px 20px;
+}
+
+.vb-book-event-month-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.vb-book-event-month-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--vb-text-tertiary);
+  margin-bottom: 10px;
+  padding-left: 2px;
 }
 
 /* Event Detail */
