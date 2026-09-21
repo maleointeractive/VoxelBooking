@@ -9,6 +9,8 @@ return [
     'cta_login'        => 'Se connecter',
     'cta_dashboard'    => 'Tableau de bord',
     'toggle_theme'     => 'Changer de thème',
+    'tagline_simple'   => 'Infrastructure de réservation',
+    'eyebrow'          => 'Infrastructure de planification',
 
     // Features
     'features_heading'  => 'Tout ce dont vous avez besoin',

@@ -155,6 +155,7 @@ return [
         'step5_title'            => 'Créez votre première entreprise',
         'step5_desc'             => 'Configurez votre première page de réservation. Vous pourrez créer d\'autres entreprises plus tard.',
         'tenant_name'            => 'Nom de l\'entreprise',
+        'tenant_name_placeholder' => 'ex. Salon Bella',
         'tenant_pattern'         => 'Modèle de réservation',
         'pattern_timeslot'       => 'Créneaux horaires',
         'pattern_timeslot_desc'  => 'Salon, thérapeute, tuteur',

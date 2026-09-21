@@ -8,6 +8,7 @@ declare(strict_types=1);
 return [
     'booking_confirmation' => [
         'subject'  => 'Réservation confirmée – :service le :date',
+        'heading'  => 'Réservation confirmée',
         'greeting' => 'Bonjour :name,',
         'body'     => 'Votre réservation a été confirmée.',
         'details'  => 'Détails de la réservation',
@@ -16,8 +17,10 @@ return [
 
     'booking_reminder' => [
         'subject'  => 'Rappel : :service demain à :time',
+        'heading'  => 'Rappel de rendez-vous',
         'greeting' => 'Bonjour :name,',
         'body'     => 'Ceci est un rappel concernant votre prochain rendez-vous.',
+        'footer'   => 'Si vous devez apporter des modifications, veuillez nous contacter.',
     ],
 
     'operator_notification' => [

@@ -344,6 +344,20 @@ return [
         12 => 'Décembre',
     ],
 
+    // ── Métadonnées de la page ──
+    'meta' => [
+        'title'       => 'Réserver – :name',
+        'description' => 'Prenez rendez-vous avec :name',
+    ],
+
+    // ── Widget intégré (bouton flottant + fenêtre sur des sites tiers) ──
+    'embed' => [
+        'button_label' => 'Réserver maintenant',
+        'close'        => 'Fermer la réservation',
+        'frame_title'  => 'Réserver :name',
+        'demo_badge'   => 'Démo',
+    ],
+
     // ── Footer ──
     'footer' => [
         'powered_by' => 'Propulsé par',

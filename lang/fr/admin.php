@@ -147,6 +147,8 @@ return [
         'memory_limit'       => 'Limite de mémoire',
         'server'             => 'Serveur',
         'database'           => 'Base de données',
+        'error_app_name_required' => 'Le nom de l\'application est obligatoire.',
+        'error_brand_url_invalid' => 'L\'URL de la marque doit être une URL valide.',
     ],
 
     // ── Confirm Dialog ──
@@ -344,6 +346,17 @@ return [
         'move_down'        => 'Descendre',
         'col_order'        => 'Ordre',
         'export_csv'       => 'Exporter en CSV',
+        'close'            => 'Fermer',
+        'error_generic'    => 'Une erreur est survenue. Veuillez réessayer.',
+    ],
+
+    // ── Validation de formulaire côté client (messages de repli utilisés par le JS admin) ──
+    'validation' => [
+        'required'  => 'Ce champ est obligatoire.',
+        'type'      => 'Veuillez saisir une valeur valide.',
+        'minlength' => 'Au moins :min caractères requis.',
+        'pattern'   => 'Veuillez respecter le format attendu.',
+        'invalid'   => 'Valeur non valide.',
     ],
 
     // ── Flash messages ──
@@ -385,6 +398,8 @@ return [
         '500_title'        => 'Un problème est survenu',
         '500_desc'         => 'Nous avons enregistré l\'erreur. Essayez d\'actualiser la page.',
         '500_action'       => 'Actualiser la page',
+        'csrf_title'       => '403 Accès interdit',
+        'csrf_desc'        => 'Jeton de sécurité non valide.',
     ],
 
     // ── Demo Mode ──
@@ -930,6 +945,9 @@ return [
         'field_max_stay'        => 'Séjour maximum (nuits)',
         'field_amenities'       => 'Équipements',
         'field_amenities_hint'  => 'Étiquettes séparées par des virgules, ex. Wi-Fi, Piscine, Climatisation',
+        'field_name_placeholder'        => 'ex. Suite vue sur mer',
+        'field_description_placeholder' => 'Décrivez la chambre ou la ressource',
+        'field_amenities_placeholder'   => 'Wi-Fi, Piscine, Climatisation',
         'seasonal_title'        => 'Tarification saisonnière',
         'seasonal_empty'        => 'Aucune tarification saisonnière configurée.',
         'seasonal_add'          => 'Ajouter un tarif saisonnier',
@@ -1103,6 +1121,18 @@ return [
         'email_field_intro'         => 'Introduction du corps',
         'email_field_outro'         => 'Conclusion du corps',
         'email_field_cta'           => 'Libellé du bouton',
+        'email_type_confirmation_label'                => 'Confirmation de réservation',
+        'email_type_confirmation_desc'                 => 'Envoyé aux clients après la confirmation d\'une réservation.',
+        'email_type_reminder_label'                    => 'Rappel de réservation',
+        'email_type_reminder_desc'                     => 'Envoyé avant le rendez-vous (lorsque les rappels sont activés).',
+        'email_type_cancellation_label'                => 'Confirmation d\'annulation',
+        'email_type_cancellation_desc'                 => 'Envoyé lorsqu\'une réservation est annulée.',
+        'email_type_reschedule_confirmation_label'     => 'Confirmation de report',
+        'email_type_reschedule_confirmation_desc'      => 'Envoyé lorsqu\'une réservation est reportée (anciens et nouveaux détails).',
+        'email_type_approval_request_label'            => 'Demande d\'approbation',
+        'email_type_approval_request_desc'             => 'Envoyé aux clients lorsque leur réservation nécessite une approbation.',
+        'email_type_approval_confirmed_label'          => 'Approbation confirmée',
+        'email_type_approval_confirmed_desc'           => 'Envoyé aux clients lorsqu\'une réservation en attente est approuvée.',
         'emails_saved'              => 'Modèles d\'e-mails enregistrés.',
 
         // Embed
@@ -1346,6 +1376,23 @@ return [
         'git_success'             => 'Mis à jour vers la v:version via Git. :count migration(s) appliquée(s).',
         'git_already_current'     => 'Déjà à jour — aucune modification récupérée.',
         'git_failed'              => 'Échec de la mise à jour Git. Consultez le journal d\'audit pour plus de détails.',
+        // Messages de statut / résultat renvoyés par GitUpdater
+        'git_msg_no_exec'         => 'L\'exécution de processus est désactivée sur ce serveur (proc_open).',
+        'git_msg_not_checkout'    => 'Cette installation n\'est pas un dépôt Git.',
+        'git_msg_no_git'          => 'La commande git n\'est pas disponible sur ce serveur.',
+        'git_msg_no_upstream'     => 'Aucune branche amont n\'est configurée. Exécutez : git branch --set-upstream-to=origin/:branch',
+        'git_msg_fetch_timeout'   => 'Délai dépassé lors de la connexion au dépôt.',
+        'git_msg_fetch_failed'    => 'Impossible de joindre le dépôt.',
+        'git_msg_fetch_failed_detail' => 'Impossible de joindre le dépôt. :error',
+        'git_msg_dirty'           => 'Des modifications locales du code ont été détectées. Résolvez-les avant de mettre à jour.',
+        'git_msg_ahead'           => 'Cette installation contient :count commit(s) local(aux) absent(s) du dépôt ; réinitialisation refusée.',
+        'git_msg_update_available' => '{1} :count mise à jour disponible.|[2,*] :count mises à jour disponibles.',
+        'git_msg_up_to_date'      => 'À jour.',
+        'git_msg_locked'          => 'Une autre mise à jour est déjà en cours. Réessayez dans un instant.',
+        'git_msg_already_current' => 'Déjà à jour.',
+        'git_msg_reset_failed'    => 'Échec de git reset. :detail',
+        'git_msg_see_output'      => 'Voir la sortie.',
+        'git_msg_updated'         => 'Mis à jour vers la v:version.',
     ],
 
     // ── Business Applications ──
