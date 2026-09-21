@@ -345,6 +345,38 @@ return [
         12 => 'Décembre',
     ],
 
+    // ── Noms des mois dans une date (1-12) ──
+    // Forme utilisée par Locale::dateLong() : en minuscule dans une date
+    // (« 27 mars 2026 »), alors que 'months' sert aux titres de calendrier.
+    'months_date' => [
+        1  => 'janvier',
+        2  => 'février',
+        3  => 'mars',
+        4  => 'avril',
+        5  => 'mai',
+        6  => 'juin',
+        7  => 'juillet',
+        8  => 'août',
+        9  => 'septembre',
+        10 => 'octobre',
+        11 => 'novembre',
+        12 => 'décembre',
+    ],
+
+    // ── Métadonnées de la page ──
+    'meta' => [
+        'title'       => 'Réserver – :name',
+        'description' => 'Prenez rendez-vous avec :name',
+    ],
+
+    // ── Widget intégré (bouton flottant + fenêtre sur des sites tiers) ──
+    'embed' => [
+        'button_label' => 'Réserver maintenant',
+        'close'        => 'Fermer la réservation',
+        'frame_title'  => 'Réserver :name',
+        'demo_badge'   => 'Démo',
+    ],
+
     // ── Footer ──
     'footer' => [
         'powered_by' => 'Propulsé par',
