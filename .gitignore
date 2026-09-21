@@ -52,3 +52,6 @@ storage/sessions/
 
 # ── IDE artifacts ──
 getMessage
+
+# Python bytecode (scripts/ and tests/scripts/)
+__pycache__/
