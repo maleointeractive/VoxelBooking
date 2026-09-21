@@ -344,6 +344,24 @@ return [
         12 => 'Décembre',
     ],
 
+    // ── Noms des mois dans une date (1-12) ──
+    // Forme utilisée par Locale::dateLong() : en minuscule dans une date
+    // (« 27 mars 2026 »), alors que 'months' sert aux titres de calendrier.
+    'months_date' => [
+        1  => 'janvier',
+        2  => 'février',
+        3  => 'mars',
+        4  => 'avril',
+        5  => 'mai',
+        6  => 'juin',
+        7  => 'juillet',
+        8  => 'août',
+        9  => 'septembre',
+        10 => 'octobre',
+        11 => 'novembre',
+        12 => 'décembre',
+    ],
+
     // ── Métadonnées de la page ──
     'meta' => [
         'title'       => 'Réserver – :name',
